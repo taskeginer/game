@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TASKEGINER - Joki Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ffe0;
+      --secondary: #00bfa5;
+      --accent: #e74c3c;
+      --bg-dark: linear-gradient(145deg, #1a1a1d, #0e0e10);
+      --text-light: #e0e0e0;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(20,20,20,0.8);
+      color: var(--primary);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 15px rgba(0,255,224,0.2);
+    }
+    .price-card {
+      background: rgba(15,15,17,0.9);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      transition: .3s;
+    }
+    .price-card:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(0,255,224,.3); }
+    .price-tag {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: .5rem;
+      text-shadow: 0 0 8px rgba(0,255,224,.6);
+    }
+    .note-box {
+      background: rgba(255,249,230,0.05);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem; margin: 2rem 0;
+      box-shadow: 0 0 10px rgba(0,255,224,0.1);
+    }
+    .whatsapp-btn {
+      display:inline-block; background:var(--secondary);
+      color:white!important; padding:1rem 2rem; border-radius:50px;
+      text-decoration:none; font-weight:bold; margin:10px;
+      transition:.3s;
+    }
+    .whatsapp-btn:hover { background:var(--primary); box-shadow:0 0 15px var(--primary); }
+    .modal{ display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.7); justify-content:center; align-items:center; }
+    .modal-content{ background:rgba(15,15,17,.95); padding:30px; border-radius:12px; max-width:500px; width:90%; color:var(--text-light); }
+    .modal-content h2{ text-align:center; color:var(--primary); }
+    .modal-content label{ display:block; margin-top:15px; font-weight:600; color:var(--primary); }
+    .modal-content input{ width:100%; padding:10px; margin-top:5px; border:1px solid rgba(0,255,224,.4); border-radius:8px; background:#0e0e10; color:var(--text-light);}
+    .modal-content button[type=submit]{ width:100%; margin-top:20px; padding:12px; background:var(--secondary); color:#fff; border:none; border-radius:8px; font-size:16px; cursor:pointer;}
+    .close-btn{ position:absolute; top:10px; right:15px; background:var(--accent); color:#fff; border:none; padding:6px 10px; border-radius:5px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header class="header" data-aos="fade-down">
+    <h1>🎮 JASA JOKI GAME</h1>
+    <p>Layanan joki aman & terpercaya untuk berbagai game online.</p>
+  </header>
+
+  <!-- Paket Layanan -->
+  <div class="price-card" data-aos="fade-up">
+    <h2>Mobile Legends</h2>
+    <ul>
+      <li>Rank Epic → Legend<div class="price-tag">Rp70.000</div></li>
+      <li>Rank Legend → Mythic<div class="price-tag">Rp120.000</div></li>
+      <li>Mythic Point 100<div class="price-tag">Rp50.000</div></li>
+    </ul>
+  </div>
+
+  <div class="price-card" data-aos="fade-up" data-aos-delay="100">
+    <h2>Free Fire</h2>
+    <ul>
+      <li>Rank Gold → Diamond<div class="price-tag">Rp60.000</div></li>
+      <li>Rank Diamond → Heroic<div class="price-tag">Rp150.000</div></li>
+    </ul>
+  </div>
+
+  <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+    <h2>PUBG Mobile</h2>
+    <ul>
+      <li>Crown → Ace<div class="price-tag">Rp200.000</div></li>
+      <li>Ace → Conqueror<div class="price-tag">Rp350.000</div></li>
+    </ul>
+  </div>
+
+  <div class="note-box" data-aos="zoom-in">
+    <strong>Benefit:</strong>
+    <p>• Aman, tanpa cheat<br>• Dikerjakan player berpengalaman<br>• Progress update harian<br>• Bisa request hero/role<br>• Garansi kerahasiaan akun</p>
+  </div>
+
+  <center data-aos="fade-up">
+    <a class="whatsapp-btn" href="javascript:void(0);" onclick="bukaFormulir()">📝 Pesan Sekarang</a>
+    <a class="whatsapp-btn" href="https://wa.me/6285768163579">📞 Hubungi Admin</a>
+  </center>
+
+  <!-- Modal Formulir -->
+  <div class="modal" id="modalFormulir">
+    <div class="modal-content">
+      <button class="close-btn" onclick="tutupFormulir()">Tutup</button>
+      <h2>Formulir Pemesanan</h2>
+      <form onsubmit="kirimKeWhatsApp(); return false;">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" required>
+
+        <label for="game">Game:</label>
+        <input type="text" id="game" placeholder="cth: Mobile Legends" required>
+
+        <label for="paket">Paket Joki:</label>
+        <input type="text" id="paket" placeholder="cth: Epic → Legend" required>
+
+        <label for="akun">Detail Akun (ID/UID):</label>
+        <input type="text" id="akun" required>
+
+        <label for="whatsapp">No WhatsApp:</label>
+        <input type="tel" id="whatsapp" pattern="[0-9]{10,15}" required>
+
+        <button type="submit">Kirim ke WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+    function bukaFormulir(){ document.getElementById('modalFormulir').style.display='flex'; }
+    function tutupFormulir(){ document.getElementById('modalFormulir').style.display='none'; }
+    function kirimKeWhatsApp(){
+      const nama=document.getElementById("nama").value;
+      const game=document.getElementById("game").value;
+      const paket=document.getElementById("paket").value;
+      const akun=document.getElementById("akun").value;
+      const whatsapp=document.getElementById("whatsapp").value;
+      const tujuan="6285768163579";
+      const pesan=`Halo, saya ingin pesan joki game.%0A%0A`+
+                  `Nama: ${nama}%0A`+
+                  `Game: ${game}%0A`+
+                  `Paket: ${paket}%0A`+
+                  `Akun: ${akun}%0A`+
+                  `No WA: ${whatsapp}`;
+      const url=`https://wa.me/${tujuan}?text=${pesan}`;
+      window.open(url,"_blank");
+      tutupFormulir();
+    }
+  </script>
+</body>
+</html>
